@@ -221,6 +221,7 @@ const updateMintInfo = async() => {
     if (minted == MAX_SUPPLY) {
         $("#cost-div").html(`SOLD OUT`);
         $("#mint-button").remove();
+        $("#mint-n-stake-button").remove();
         $("#quantity-controls").remove();
     }
 }

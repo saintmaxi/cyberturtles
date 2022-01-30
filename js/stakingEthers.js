@@ -43,7 +43,7 @@ const stakedTurtlesAbi = () => {
 
 const baseImageURI = "";
 
-const etherscanBase = `https://etherscan.io/tx/`;
+const etherscanBase = `https://rinkeby.etherscan.io/tx/`;
 const correctChain = 4;
 
 /*********************************END CONFIG************************************/
@@ -116,7 +116,7 @@ const getShellBalance = async()=>{
 const getPendingShellBalance = async()=>{
     let userAddress = await getAddress();
     const pendingShell = await stakedTurtles.getPendingTokensOfAddress(userAddress);
-    $("#claimable-shell").text(`${formatEther(pendingShell)}`);
+    $("#claimable-shell").text(`${Number(formatEther(pendingShell)).toFixed(2)}`);
 };
 
 const claimShell = async()=>{
@@ -220,7 +220,7 @@ const getTurtleImages = async()=>{
             if (selectedForUnstaking.has(Number(turtleId))) {
                 active = "active";
             }
-            let shellEarned = formatEther(await stakedTurtles.getPendingTokens(turtleId));
+            let shellEarned = formatEther(Number(await stakedTurtles.getPendingTokens(turtleId)).toFixed(2));
             // batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="${baseImageURI}${turtleId}.png"><p class="turtle-id">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
             batchFakeJSX += `<div id="turtle-${turtleId}" class="your-turtle ${active}"><img onclick="selectForUnstaking(${turtleId})" src="https://cyberturtles.gg/wp-content/uploads/2022/01/Turtle-n-traits-sample-28.png">#${turtleId}</p><p class="shell-earned"><span id="shell-earned-${turtleId}">${shellEarned}</span></p></div>`
         
